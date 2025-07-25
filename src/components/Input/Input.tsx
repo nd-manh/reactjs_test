@@ -4,14 +4,15 @@ import './Input.css';
 type InputProps = {
     label?: string;
     placeholder?: string;
+    value: string;
+    onChange: (value: string) => void;
     type?: string;
     required?: boolean;
     minLength?: number;
     maxLength?: number;
-    errorMessage?: string;
-    value: string;
-    onChange: (value: string) => void;
+    validate?: (value: string) => string | null; // <-- Custom validation
 };
+
 
 const Input: React.FC<InputProps> = ({
     label,
@@ -20,9 +21,9 @@ const Input: React.FC<InputProps> = ({
     required = false,
     minLength = 3,
     maxLength = 32,
-    errorMessage,
     value,
     onChange,
+    validate
 }) => {
     const [touched, setTouched] = useState(false);
     const [error, setError] = useState<string>('');
@@ -31,15 +32,19 @@ const Input: React.FC<InputProps> = ({
         if (!touched) return;
 
         if (required && value.trim() === '') {
-            setError('');
-        } else if (value.length < minLength) {
+            setError('This field is required');
+        } else if (minLength && value.length < minLength) {
             setError(`Must be at least ${minLength} characters`);
-        } else if (value.length > maxLength) {
+        } else if (maxLength && value.length > maxLength) {
             setError(`Must be no more than ${maxLength} characters`);
+        } else if (validate) {
+            const customError = validate(value);
+            setError(customError || '');
         } else {
             setError('');
         }
-    }, [value, touched, required, minLength, maxLength]);
+    }, [value, touched, required, minLength, maxLength, validate]);
+
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         onChange(e.target.value);
