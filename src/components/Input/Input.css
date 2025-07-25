@@ -1,0 +1,38 @@
+.validated-input {
+  margin-bottom: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.validated-input-label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.validated-input-field {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.validated-input-field:focus {
+  border-color: #4096ff;
+  box-shadow: 0 0 0 2
+}
+
+.validated-input-error {
+  color: #ff4d4f;
+  font-size: 0.75rem; /* Smaller */
+  margin-top: 0.25rem;
+  line-height: 1.2;
+}
+
+.validated-input-field.error {
+  border-color: #ff4d4f;
+  box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.15);
+}

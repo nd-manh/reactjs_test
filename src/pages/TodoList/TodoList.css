@@ -1,0 +1,151 @@
+.todo-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.todo-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: self-start;
+  margin-bottom: 1.25rem;
+}
+
+
+.todo-form button {
+  padding: 0.6rem 1rem;
+  background-color: #4096ff;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.todo-form button:disabled {
+  background-color: #a0c4ff;
+  cursor: not-allowed;
+}
+
+.todo-form button:hover:not(:disabled) {
+  background-color: #1677ff;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.todo-item span {
+  font-size: 1rem;
+  color: #444;
+}
+
+.todo-item button {
+  background: none;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.todo-item button:hover {
+  background-color: #f5f5f5;
+}
+
+.todo-item button:first-of-type {
+  color: #4096ff;
+}
+
+.todo-item button:last-of-type {
+  color: #ff4d4f;
+}
+
+
+.todo-item button {
+  background: none;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  color: #000;
+}
+
+.todo-item button:hover {
+  opacity: 0.85;
+}
+
+/* Edit: Yellow */
+.todo-item button.edit-btn {
+  color: #d48806; /* AntD gold */
+}
+
+/* Update: Blue */
+.todo-item button.update-btn {
+  color: #4096ff; /* AntD blue */
+}
+
+/* Cancel: Grey */
+.todo-item button.cancel-btn {
+  color: #8c8c8c; /* AntD grey */
+}
+
+/* Add button */
+.todo-form button {
+  padding: 0.6rem 1rem;
+  background-color: #52c41a; /* AntD green */
+  border: none;
+  color: white;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  height: 42px;
+  font-weight: 600;
+}
+
+.todo-form button:disabled {
+  background-color: #b7eb8f;
+  cursor: not-allowed;
+}
+
+.todo-form button:hover:not(:disabled) {
+  background-color: #389e0d;
+}
+
+.todo-index {
+  font-weight: 600;
+  color: #8c8c8c;
+  margin-right: 0.5rem;
+  min-width: 1.5rem;
+}
