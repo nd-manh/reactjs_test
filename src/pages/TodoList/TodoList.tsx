@@ -3,6 +3,7 @@ import Input from '../../components/Input/Input';
 import './TodoList.css';
 import Spinner from '../../components/Spinner/Spinner';
 import { toast } from 'react-toastify';
+import Button from '../../components/Button/Button';
 
 type Todo = {
     id: number;
@@ -99,18 +100,18 @@ const TodoList: React.FC = () => {
                     minLength={3}
                     maxLength={32}
                 />
-                <button
+                <Button
                     type="submit"
                     disabled={
                         input.trim().length < 3 ||
                         input.length > 32 ||
                         loadingAction.type === 'add'
                     }
+                    loading={loadingAction.type === 'add'}
                     className="add-btn"
                 >
-                    {loadingAction.type === 'add' ? <Spinner /> : 'Add'}
-                </button>
-
+                    Add
+                </Button>
             </form>
 
             <ul className="todo-list">
@@ -128,48 +129,40 @@ const TodoList: React.FC = () => {
                                     maxLength={32}
                                 />
                                 <div>
-                                    <button
+                                    <Button
                                         onClick={saveEditing}
                                         disabled={
                                             editingText.trim().length < 3 ||
                                             editingText.length > 32 ||
-                                            loadingAction.type === 'update' && loadingAction.id === editingId
+                                            (loadingAction.type === 'update' && loadingAction.id === editingId)
                                         }
+                                        loading={loadingAction.type === 'update' && loadingAction.id === editingId}
                                         className="update-btn"
                                     >
-                                        {loadingAction.type === 'update' && loadingAction.id === editingId ? (
-                                            <Spinner />
-                                        ) : (
-                                            'Update'
-                                        )}
-                                    </button>
-                                    <button onClick={cancelEditing} className="cancel-btn">
+                                        Update
+                                    </Button>
+
+                                    <Button onClick={cancelEditing} className="cancel-btn">
                                         Cancel
-                                    </button>
+                                    </Button>
                                 </div>
                             </>
                         ) : (
                             <>
                                 <span>{todo.text}</span>
                                 <div>
-                                    <button
-                                        onClick={() => startEditing(todo)}
-                                        className="edit-btn"
-                                    >
+                                    <Button onClick={() => startEditing(todo)} className="edit-btn">
                                         Edit
-                                    </button>
-                                    <button
+                                    </Button>
+
+                                    <Button
                                         onClick={() => handleDelete(todo.id)}
-                                        disabled={
-                                            loadingAction.type === 'delete' && loadingAction.id === todo.id
-                                        }
+                                        disabled={loadingAction.type === 'delete' && loadingAction.id === todo.id}
+                                        loading={loadingAction.type === 'delete' && loadingAction.id === todo.id}
+                                        className="delete-btn"
                                     >
-                                        {loadingAction.type === 'delete' && loadingAction.id === todo.id ? (
-                                            <Spinner />
-                                        ) : (
-                                            'Delete'
-                                        )}
-                                    </button>
+                                        Delete
+                                    </Button>
                                 </div>
                             </>
                         )}
