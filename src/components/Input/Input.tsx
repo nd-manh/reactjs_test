@@ -1,7 +1,8 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent, forwardRef } from 'react';
 import './Input.css';
 
 type InputProps = {
+    id?: string | number;
     label?: string;
     placeholder?: string;
     value: string;
@@ -10,11 +11,10 @@ type InputProps = {
     required?: boolean;
     minLength?: number;
     maxLength?: number;
-    validate?: (value: string) => string | null; // <-- Custom validation
+    validate?: (value: string) => string | null;
 };
 
-
-const Input: React.FC<InputProps> = ({
+const Input = forwardRef<HTMLInputElement, InputProps>(({
     label,
     placeholder,
     type = 'text',
@@ -24,7 +24,7 @@ const Input: React.FC<InputProps> = ({
     value,
     onChange,
     validate
-}) => {
+}, ref) => {
     const [touched, setTouched] = useState(false);
     const [error, setError] = useState<string>('');
 
@@ -45,7 +45,6 @@ const Input: React.FC<InputProps> = ({
         }
     }, [value, touched, required, minLength, maxLength, validate]);
 
-
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         onChange(e.target.value);
         setTouched(true);
@@ -58,6 +57,7 @@ const Input: React.FC<InputProps> = ({
         <div className="validated-input">
             {label && <label className="validated-input-label">{label}</label>}
             <input
+                ref={ref}
                 type={type}
                 placeholder={placeholder}
                 value={value}
@@ -67,6 +67,6 @@ const Input: React.FC<InputProps> = ({
             {error && <div className="validated-input-error">{error}</div>}
         </div>
     );
-};
+});
 
 export default Input;

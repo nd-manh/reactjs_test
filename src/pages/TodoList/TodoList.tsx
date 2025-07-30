@@ -1,7 +1,6 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useRef, useEffect } from 'react';
 import Input from '../../components/Input/Input';
 import './TodoList.css';
-import Spinner from '../../components/Spinner/Spinner';
 import { toast } from 'react-toastify';
 import Button from '../../components/Button/Button';
 
@@ -19,7 +18,18 @@ const TodoList: React.FC = () => {
         type: 'add' | 'update' | 'delete' | null;
         id?: number; // for delete/update targeting
     }>({ type: null });
+
+    const editInputRefs = useRef<Record<number, HTMLInputElement | null>>({});
+
+    useEffect(() => {
+        if (editingId !== null && editInputRefs.current[editingId]) {
+            editInputRefs.current[editingId]?.focus();
+        }
+    }, [editingId]);
+
     // Add new todo
+
+
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         if (input.trim().length < 3 || input.trim().length > 32) return;
@@ -93,7 +103,7 @@ const TodoList: React.FC = () => {
             <h2>Todo List</h2>
             <form onSubmit={handleSubmit} className="todo-form">
                 <Input
-                    placeholder="Enter todo"
+                    placeholder="Enter todo *"
                     value={input}
                     onChange={setInput}
                     required
@@ -120,13 +130,16 @@ const TodoList: React.FC = () => {
                         <span className="todo-index">{index + 1}.</span>
                         {editingId === todo.id ? (
                             <>
-
                                 <Input
+                                    id={`edit-task-${todo.id}`}
                                     value={editingText}
                                     onChange={onEditingChange}
                                     required
                                     minLength={3}
                                     maxLength={32}
+                                    ref={(el) => {
+                                        editInputRefs.current[todo.id] = el;
+                                    }}
                                 />
                                 <div>
                                     <Button

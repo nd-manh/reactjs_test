@@ -17,7 +17,6 @@
 
 .todo-form {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   gap: 1rem;
   align-items: self-start;
